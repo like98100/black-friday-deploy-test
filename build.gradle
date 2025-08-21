@@ -63,7 +63,10 @@ dependencies {
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
     //mongodb
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    //implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    //h2
+    implementation 'com.h2database:h2'
 
     // Querydsl 추가
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
