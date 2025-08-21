@@ -1,4 +1,4 @@
-FROM openjdk:17.0.2-jdk-slim-buster AS builder
+FROM openjdk:17-slim
 
 
 WORKDIR /app
@@ -7,10 +7,12 @@ COPY gradle ./gradle
 COPY src/main ./src/main
 RUN ./gradlew clean bootJar
 
-FROM openjdk:17.0.2-slim-buster
-
 WORKDIR /app
-COPY  --from=builder /app/build/libs/blackfriday.jar blackfriday.jar
+COPY  build/libs/blackfriday.jar blackfriday.jar
+
+RUN echo "Copied jar file Check" && ls -la /app/
+
+EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar" ,"blackfriday.jar"]
 #ENTRYPOINT ["java", "-jar" ,"blackfriday.jar" , "-Dspring.profiles.active=dev"]
