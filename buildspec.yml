@@ -1,0 +1,104 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: ap-northeast-2  # 또는 사용하는 리전
+    IMAGE_REPO_NAME: like98100-deploy-dev     # ECR 리포지토리 이름
+
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - echo "Installing dependencies..."
+      - java -version
+      - docker --version
+
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":"app","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - echo Writing task definition...
+      - |
+        cat > taskdef.json <<EOF
+        {
+          "family": "like98100-deploy",
+          "networkMode": "awsvpc",
+          "requiresCompatibilities": ["FARGATE"],
+          "cpu": "256",
+          "memory": "512",
+          "executionRoleArn": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/like98100-deploy-ecs-execution-role",
+          "taskRoleArn": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/like98100-deploy-ecs-task-role",
+          "containerDefinitions": [
+            {
+              "name": "app",
+              "image": "${REPOSITORY_URI}:${IMAGE_TAG}",
+              "essential": true,  # 추가
+              "readonlyRootFilesystem": true,  # 보안 강화
+              "healthCheck": {  # 헬스체크 추가
+                "command": ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3
+              },
+              "portMappings": [
+                {
+                  "containerPort": 8080,
+                  "protocol": "tcp"
+                }
+              ],
+              "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                  "awslogs-group": "/ecs/like98100-deploy-dev",
+                  "awslogs-region": "${AWS_DEFAULT_REGION}",
+                  "awslogs-stream-prefix": "ecs"
+                }
+              },
+              "environment": [
+                {
+                  "name": "NODE_ENV",
+                  "value": "dev"
+                }
+              ]
+            }
+          ]
+        }
+        EOF
+      - echo Writing appspec file...
+      - |
+        cat > appspec.yaml <<EOF
+        version: 0.0
+        Resources:
+          - TargetService:
+              Type: AWS::ECS::Service
+              Properties:
+                TaskDefinition: <TASK_DEFINITION>
+                LoadBalancerInfo:
+                  ContainerName: "app"
+                  ContainerPort: 8080
+        EOF
+
+artifacts:
+  files:
+    - imagedefinitions.json
+    - taskdef.json
+    - appspec.yaml
