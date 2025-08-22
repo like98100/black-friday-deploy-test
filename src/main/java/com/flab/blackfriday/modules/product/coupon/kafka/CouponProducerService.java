@@ -13,7 +13,7 @@ import com.flab.blackfriday.modules.product.coupon.service.ProductCouponService;
 import com.flab.blackfriday.modules.product.coupon.util.CouponRandomUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.core.KafkaTemplate;
+//import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -40,11 +40,11 @@ public class CouponProducerService {
 
     private static final String TOPIC = "coupon_create";
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    //private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public void sendMessage(ProductCouponEpinRequest productCouponEpinRequest) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        kafkaTemplate.send(TOPIC,objectMapper.writeValueAsString(productCouponEpinRequest));
-    }
+//    public void sendMessage(ProductCouponEpinRequest productCouponEpinRequest) throws JsonProcessingException {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        kafkaTemplate.send(TOPIC,objectMapper.writeValueAsString(productCouponEpinRequest));
+//    }
 
 }

@@ -60,10 +60,10 @@ public class ProductCouponUserController extends BaseModuleController {
      */
     @GetMapping(value=API_URL+"/product/coupon/epin/list")
     public Page<ProductCouponEpinWithInfoResponse> selectProductCouponEpinPageList(ProductCouponDefaultDto searchDto) throws Exception {
-        if(!memberSession.isAuthenticated()){
-            logger.error("### 인증되지 않은 접근. ### ");
-            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-        }
+//        if(!memberSession.isAuthenticated()){
+//            logger.error("### 인증되지 않은 접근. ### ");
+//            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//        }
         return productCouponService.selectProductCouponEpinPageList(searchDto);
     }
 
@@ -75,11 +75,11 @@ public class ProductCouponUserController extends BaseModuleController {
      */
     @GetMapping(value=API_URL+"/product/coupon/epin/view")
     public ProductCouponEpinDto selectProductCouponEpin(ProductCouponEpinDto epinDto) throws Exception {
-        if(!memberSession.isAuthenticated()){
-            logger.error("### 인증되지 않은 접근. ### ");
-            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-        }
-        epinDto.setId(memberSession.getMemberSession().getId());
+//        if(!memberSession.isAuthenticated()){
+//            logger.error("### 인증되지 않은 접근. ### ");
+//            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//        }
+//        epinDto.setId(memberSession.getMemberSession().getId());
         epinDto = productCouponService.selectProductCouponEpin(epinDto);
         ProductCouponDto productCouponDto = new ProductCouponDto();
         productCouponDto.setIdx(epinDto.getIdx());
@@ -100,10 +100,10 @@ public class ProductCouponUserController extends BaseModuleController {
         DeferredResult<ResponseEntity<?>> deferredResult = new DeferredResult<>(3000L);//timeout 3초
 
         try{
-            if(!memberSession.isAuthenticated()){
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-            }
+//            if(!memberSession.isAuthenticated()){
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//            }
             productCouponEpinRequest.setUseType(useType);
 
             //비동기 컨슈머 결과 확인
@@ -117,7 +117,7 @@ public class ProductCouponUserController extends BaseModuleController {
                 return null;
             });
 
-            couponProducerService.sendMessage(productCouponEpinRequest);
+//            couponProducerService.sendMessage(productCouponEpinRequest);
         }catch(Exception e) {
               deferredResult.setResult(new ResponseEntity<>("쿠폰생성시 오류가 발생하였습니다.", HttpStatus.UNPROCESSABLE_ENTITY));
               deferredResult.setErrorResult(e);
@@ -155,9 +155,9 @@ public class ProductCouponUserController extends BaseModuleController {
     @PostMapping(API_URL+"/coupon/create/result")
     public ResponseEntity<?> couponCreateResult(long idx) throws Exception {
 
-        if(!memberSession.isAuthenticated()){
-            return new ResponseEntity<>("회원 인증을 해주시기 바랍니다.", HttpStatus.UNAUTHORIZED);
-        }
+//        if(!memberSession.isAuthenticated()){
+//            return new ResponseEntity<>("회원 인증을 해주시기 바랍니다.", HttpStatus.UNAUTHORIZED);
+//        }
 
         Map<String,String> map = couponConsumerService.getCouponMap();
         if(map == null){
@@ -165,9 +165,9 @@ public class ProductCouponUserController extends BaseModuleController {
         }
         String id = map.get("id");
         long num = Long.parseLong(map.get("idx"));
-        if(!id.equals(memberSession.getMemberSession().getId()) || !Objects.equals(idx,num)){
-            return new ResponseEntity<>("쿠폰 정보 확인시 오류가 발생했습니다. 쿠폰 함에서 확인해주시기 바랍니다.", HttpStatus.UNPROCESSABLE_ENTITY);
-        }
+//        if(!id.equals(memberSession.getMemberSession().getId()) || !Objects.equals(idx,num)){
+//            return new ResponseEntity<>("쿠폰 정보 확인시 오류가 발생했습니다. 쿠폰 함에서 확인해주시기 바랍니다.", HttpStatus.UNPROCESSABLE_ENTITY);
+//        }
 
         return ResponseEntity.ok(map.get("couponNum"));
     }
@@ -182,13 +182,13 @@ public class ProductCouponUserController extends BaseModuleController {
     @PostMapping(value=API_URL+"/product/coupon/epin/create")
     public ResponseEntity<?>  createProductCouponEpin2(@RequestBody ProductCouponEpinRequest productCouponEpinRequest)  throws Exception {
 
-        if(!memberSession.isAuthenticated()){
-            logger.error("### 인증되지 않은 접근. ### ");
-            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-        }
+//        if(!memberSession.isAuthenticated()){
+//            logger.error("### 인증되지 않은 접근. ### ");
+//            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//        }
 
         ProductCouponEpinDto epinDto = ProductCouponEpinDto.createOf(productCouponEpinRequest);
-        epinDto.setId(memberSession.getMemberSession().getId());
+        //epinDto.setId(memberSession.getMemberSession().getId());
         String couponNum = productCouponAppService.updateProductCouponEpinIssueToMember(epinDto);
 
         return ResponseEntity.ok(couponNum);

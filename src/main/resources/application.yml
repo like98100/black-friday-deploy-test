@@ -1,31 +1,49 @@
 spring:
   profiles:
-    group:
-      local : local, common
-      dev : dev ,common
-#    active: local
+    # group:
+    #   local : local, common
+    #   dev : dev ,common
+    active: dev
+  jpa:
+    defer-data-source-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
----
-spring:
-  config:
-    activate:
-      on-profile: local
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/blackfriday?serverTimezone=UTC&characterEncoding=UTF-8
-    username: blackfriday
-    password: blackfriday
-    tomcat:
-       initial-size: 20
-       max-idle: 15
-       min-idle: 8
-    driver-class-name: com.mysql.cj.jdbc.Driver
+aws:
+  region:
+    static: ap-northeast-2     # 리전
+  stack:
+    auto: false
 
-  kafka:
-    bootstrap-servers: http://localhost:9092
+server:
+  port: 8080
 
-mocks_server:
-        url: http://localhost:3100
+# ---
+# spring:
+#   config:
+#     activate:
+#       on-profile: local
+
+#   datasource:
+#     url: jdbc:mysql://localhost:3306/blackfriday?serverTimezone=UTC&characterEncoding=UTF-8
+#     username: blackfriday
+#     password: blackfriday
+#     tomcat:
+#        initial-size: 20
+#        max-idle: 15
+#        min-idle: 8
+#     driver-class-name: com.mysql.cj.jdbc.Driver
+
+#   kafka:
+#     bootstrap-servers: http://localhost:9092
+
+# mocks_server:
+#         url: http://localhost:3100
 
 
 ---
@@ -33,59 +51,72 @@ spring:
   config:
     activate:
       on-profile: dev
+  cors:
+    allowed-origins: http://localhost:3000
+    allowed-methods: GET, POST, PUT, DELETE, OPTIONS
+    allowed-headers: "*"
+    allow-credentials: true
+    max-age: 3600
 
   datasource:
-    url: jdbc:mysql://host.docker.internal:33306/blackfriday_dev?serverTimezone=UTC&characterEncoding=UTF-8
-    username: blackfriday
-    password: blackfriday
-    tomcat:
-      initial-size: 20
-      max-idle: 15
-      min-idle: 8
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MYSQL
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
 
-  kafka:
-    bootstrap-servers: http://host.docker.internal:9092
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
+#  kafka:
+#    bootstrap-servers: http://host.docker.internal:9092
+#
 mocks_server:
          url: http://host.docker.internal:3200
 
----
-spring:
-  config:
-    activate:
-      on-profile: common
+# ---
+# spring:
+#   config:
+#     activate:
+#       on-profile: common
 
-  data:
-    mongodb:
-      uri: mongodb://root:root@mongo1:27018/?replicaSet=rs0&readPreference=primary&authSource=admin
-      database: blackfriday
-  #  data:
-#    mongodb:
-#      database: blackfriday
-#      host: localhost
-#      port: 27017
+#   data:
+#     mongodb:
+#       uri: mongodb://root:root@mongo1:27018/?replicaSet=rs0&readPreference=primary&authSource=admin
+#       database: blackfriday
+#   #  data:
+# #    mongodb:
+# #      database: blackfriday
+# #      host: localhost
+# #      port: 27017
 
-  jpa:
-    open-in-view: false
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        # show_sql: true
-        # format_sql: true
-        default_batch_fetch_size: 500  #??? ?? ???? ?? ??
+#   jpa:
+#     open-in-view: false
+#     hibernate:
+#       ddl-auto: update
+#     properties:
+#       hibernate:
+#         # show_sql: true
+#         # format_sql: true
+#         default_batch_fetch_size: 500  #??? ?? ???? ?? ??
 
 
-logging:
-  config: classpath:log4j2.yml
-  level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: debug
+# logging:
+#   config: classpath:log4j2.yml
+#   level:
+#     org.hibernate.SQL: debug
+#     org.hibernate.type: debug
 
-jwt:
-  header: Authorization
-  secretKey: blackfridayblackfridayblackfridayblackfridayblackfridayblackfriday
+# jwt:
+#   header: Authorization
+#   secretKey: blackfridayblackfridayblackfridayblackfridayblackfridayblackfriday
 
 #postman:
 #      url: https://3d916b8e-9f29-4eaa-874f-f6eeb9759c95.mock.pstmn.io

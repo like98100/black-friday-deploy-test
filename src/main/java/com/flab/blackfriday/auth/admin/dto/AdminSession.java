@@ -1,7 +1,7 @@
 package com.flab.blackfriday.auth.admin.dto;
 
 import com.flab.blackfriday.auth.admin.service.AdminService;
-import com.flab.blackfriday.auth.jwt.JwtProvider;
+//import com.flab.blackfriday.auth.jwt.JwtProvider;
 import com.flab.blackfriday.auth.member.dto.MemberDto;
 import com.flab.blackfriday.auth.member.dto.MemberSummaryResponse;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AdminSession {
 
-    private final JwtProvider jwtProvider;
+    //private final JwtProvider jwtProvider;
 
     private final AdminService adminService;
 
@@ -37,20 +37,20 @@ public class AdminSession {
      * @param dto
      * @return
      */
-    public String createToken(MemberDto dto) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getId(),dto.getPassword());
-        return jwtProvider.createToken(authenticationToken,true);
-    }
-
-    public boolean isAuthenticated() {
-        authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication != null;
-    }
-
-    public AdminResponse getAdminSession(){
-        authentication = SecurityContextHolder.getContext().getAuthentication();
-        return adminService.selectAdminSession(authentication.getName());
-    }
+//    public String createToken(MemberDto dto) {
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getId(),dto.getPassword());
+//        return jwtProvider.createToken(authenticationToken,true);
+//    }
+//
+//    public boolean isAuthenticated() {
+//        authentication = SecurityContextHolder.getContext().getAuthentication();
+//        return authentication != null;
+//    }
+//
+//    public AdminResponse getAdminSession(){
+//        authentication = SecurityContextHolder.getContext().getAuthentication();
+//        return adminService.selectAdminSession(authentication.getName());
+//    }
 
 
 }

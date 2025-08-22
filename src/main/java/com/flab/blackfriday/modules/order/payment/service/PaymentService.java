@@ -55,9 +55,9 @@ public class PaymentService {
             if(orderDto == null){
                 throw new PaymentFailException("잘못된 접근입니다.");
             }
-            if (!orderDto.getId().equals(memberSession.getMemberSession().getId())) {
-                throw new PaymentFailException("회원정보가 일치하지 않습니다.");
-            }
+//            if (!orderDto.getId().equals(memberSession.getMemberSession().getId())) {
+//                throw new PaymentFailException("회원정보가 일치하지 않습니다.");
+//            }
 
             System.out.println("payment url : "+payUrl+apiUrl);
             //결제 정보 response
@@ -98,9 +98,9 @@ public class PaymentService {
             if(orderDto == null){
                 throw new PaymentFailException("회원정보가 일치하지 않습니다.");
             }
-            if (!orderDto.getId().equals(memberSession.getMemberSession().getId())) {
-                throw new PaymentFailException("회원정보가 일치하지 않습니다.");
-            }
+//            if (!orderDto.getId().equals(memberSession.getMemberSession().getId())) {
+//                throw new PaymentFailException("회원정보가 일치하지 않습니다.");
+//            }
 
             System.out.println("payment url : "+payUrl+apiUrl);
 

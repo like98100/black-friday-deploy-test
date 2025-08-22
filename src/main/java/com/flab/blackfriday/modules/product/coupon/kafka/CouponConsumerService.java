@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
-import org.springframework.kafka.annotation.KafkaListener;
+//import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -127,7 +127,7 @@ public class CouponConsumerService {
      * @param message
      * @throws Exception
      */
-    @KafkaListener(topics = "coupon_create", groupId = "couponGroup")
+//    @KafkaListener(topics = "coupon_create", groupId = "couponGroup")
     public void couponInsert(String message) throws Exception {
 
         Map<String,String> map = couponCreate(message);

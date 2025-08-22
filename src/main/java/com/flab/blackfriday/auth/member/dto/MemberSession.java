@@ -1,6 +1,6 @@
 package com.flab.blackfriday.auth.member.dto;
 
-import com.flab.blackfriday.auth.jwt.JwtProvider;
+//import com.flab.blackfriday.auth.jwt.JwtProvider;
 import com.flab.blackfriday.auth.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MemberSession {
 
-    private final JwtProvider jwtProvider;
+    //private final JwtProvider jwtProvider;
 
     private final MemberService memberService;
 
@@ -34,19 +34,19 @@ public class MemberSession {
      * @param dto
      * @return
      */
-    public String createToken(MemberDto dto) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getId(),dto.getPassword());
-        return jwtProvider.createToken(authenticationToken,true);
-    }
-    
-    public boolean isAuthenticated() {
-        authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication != null;
-    }
-
-    public MemberSummaryResponse getMemberSession(){
-        authentication = SecurityContextHolder.getContext().getAuthentication();
-        return memberService.selectMemberSession(authentication.getName());
-    }
+//    public String createToken(MemberDto dto) {
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getId(),dto.getPassword());
+//        return jwtProvider.createToken(authenticationToken,true);
+//    }
+//
+//    public boolean isAuthenticated() {
+//        authentication = SecurityContextHolder.getContext().getAuthentication();
+//        return authentication != null;
+//    }
+//
+//    public MemberSummaryResponse getMemberSession(){
+//        authentication = SecurityContextHolder.getContext().getAuthentication();
+//        return memberService.selectMemberSession(authentication.getName());
+//    }
 
 }

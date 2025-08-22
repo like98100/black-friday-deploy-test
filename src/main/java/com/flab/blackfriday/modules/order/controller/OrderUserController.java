@@ -51,10 +51,10 @@ public class OrderUserController extends BaseModuleController {
      */
     @GetMapping(API_URL+"/order/list")
     public Page<OrderSummaryResponse> selectOrderPageList(OrderDefaultDto orderDefaultDto) throws Exception {
-        if(!memberSession.isAuthenticated()){
-            logger.error("### 인증되지 않은 접근. ### ");
-            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-        }
+//        if(!memberSession.isAuthenticated()){
+//            logger.error("### 인증되지 않은 접근. ### ");
+//            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//        }
         return orderService.selectOrderPageList(orderDefaultDto);
     }
 
@@ -66,15 +66,15 @@ public class OrderUserController extends BaseModuleController {
      */
     @GetMapping(API_URL+"/order/{idx}")
     public OrderDto selectOrderView(@PathVariable("idx") long idx) throws Exception {
-        if(!memberSession.isAuthenticated()){
-            logger.error("### 인증되지 않은 접근. ### ");
-            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-        }
+//        if(!memberSession.isAuthenticated()){
+//            logger.error("### 인증되지 않은 접근. ### ");
+//            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//        }
         OrderDto orderDto = new OrderDto();
         orderDto = orderService.selectOrder(orderDto);
-        if(orderDto == null || !orderDto.getId().equals(memberSession.getMemberSession().getId())){
-            throw new NoExistAuthException("해당 정보가 존재하지 않습니다.",HttpStatus.UNAUTHORIZED.name());
-        }
+//        if(orderDto == null || !orderDto.getId().equals(memberSession.getMemberSession().getId())){
+//            throw new NoExistAuthException("해당 정보가 존재하지 않습니다.",HttpStatus.UNAUTHORIZED.name());
+//        }
         return orderDto;
     }
 
@@ -86,15 +86,15 @@ public class OrderUserController extends BaseModuleController {
     @PostMapping(API_URL+"/order")
     public ResponseEntity<?> insertOrder(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
         try {
-            if (!memberSession.isAuthenticated()) {
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.", HttpStatus.UNAUTHORIZED.name());
-            }
+//            if (!memberSession.isAuthenticated()) {
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.", HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : " + orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             orderService.insertOrder(orderDto);
             paymentService.payment(orderDto);
         } catch (Exception e) {
@@ -113,15 +113,15 @@ public class OrderUserController extends BaseModuleController {
     @PostMapping(API_URL+"/order/no/lock")
     public ResponseEntity<?> insertOrderNoLock(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
         try {
-            if (!memberSession.isAuthenticated()) {
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.", HttpStatus.UNAUTHORIZED.name());
-            }
+//            if (!memberSession.isAuthenticated()) {
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.", HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : " + orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             orderService.insertOrderNoLock(orderDto);
             paymentService.payment(orderDto);
         } catch (Exception e) {
@@ -141,15 +141,15 @@ public class OrderUserController extends BaseModuleController {
     public ResponseEntity<?> insertOrderLockv1(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
 
         try {
-            if (!memberSession.isAuthenticated()) {
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.", HttpStatus.UNAUTHORIZED.name());
-            }
+//            if (!memberSession.isAuthenticated()) {
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.", HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : " + orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             orderService.insertOrderPessimisticLock(orderDto);
             paymentService.payment(orderDto);
         }catch (Exception e) {
@@ -170,15 +170,15 @@ public class OrderUserController extends BaseModuleController {
     public ResponseEntity<?> insertOrderLockv2(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
 
         try {
-            if(!memberSession.isAuthenticated()){
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-            }
+//            if(!memberSession.isAuthenticated()){
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : "+orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             orderLockService.insertOrderOptimisticLock(orderDto);
             paymentService.payment(orderDto);
         }catch (Exception e) {
@@ -193,15 +193,15 @@ public class OrderUserController extends BaseModuleController {
     public ResponseEntity<?> insertOrderLockv3(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
 
         try {
-            if(!memberSession.isAuthenticated()){
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-            }
+//            if(!memberSession.isAuthenticated()){
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : "+orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             orderLockService.insertOrderOptimisticLockAsync(orderDto);
             paymentService.payment(orderDto);
         }catch (Exception e) {
@@ -216,15 +216,15 @@ public class OrderUserController extends BaseModuleController {
     public ResponseEntity<?> insertOrderLockv4(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
 
         try {
-            if(!memberSession.isAuthenticated()){
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-            }
+//            if(!memberSession.isAuthenticated()){
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : "+orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             orderLockService.insertOrderOptimisticLockAsyncCache(orderDto);
             paymentService.payment(orderDto);
         }catch (Exception e) {
@@ -239,15 +239,15 @@ public class OrderUserController extends BaseModuleController {
     public ResponseEntity<?> insertOrderLockv5(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
 
         try {
-            if(!memberSession.isAuthenticated()){
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-            }
+//            if(!memberSession.isAuthenticated()){
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : "+orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             orderLockService.insertOrderOptimisticLockAsyncCacheThread(orderDto);
             paymentService.payment(orderDto);
         }catch (Exception e) {
@@ -262,15 +262,15 @@ public class OrderUserController extends BaseModuleController {
     public ResponseEntity<?> insertOrderLockv6(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
 
         try {
-            if(!memberSession.isAuthenticated()){
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-            }
+//            if(!memberSession.isAuthenticated()){
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : "+orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             orderLockService.insertOrderOptimisticLockAsyncCacheNoLimit(orderDto);
             paymentService.payment(orderDto);
         }catch (Exception e) {
@@ -285,15 +285,15 @@ public class OrderUserController extends BaseModuleController {
     public ResponseEntity<?> insertOrderLockv7(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
 
         try {
-            if(!memberSession.isAuthenticated()){
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-            }
+//            if(!memberSession.isAuthenticated()){
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : "+orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             orderLockService.insertOrderOptimisticLockAsyncCacheNoLimitv2(orderDto);
             paymentService.payment(orderDto);
         }catch (Exception e) {
@@ -308,15 +308,15 @@ public class OrderUserController extends BaseModuleController {
     public ResponseEntity<?> insertOrderLockv8(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
 
         try {
-            if(!memberSession.isAuthenticated()){
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-            }
+//            if(!memberSession.isAuthenticated()){
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : "+orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
             if(orderService.insertOrderOptimisticNolimitLock(orderDto)) {
                 paymentService.payment(orderDto);
             }
@@ -332,15 +332,15 @@ public class OrderUserController extends BaseModuleController {
     public ResponseEntity<?> insertOrderLockv9(final @Valid @RequestBody OrderCreateRequest orderCreateRequest) throws Exception {
         long result = 0;
         try {
-            if(!memberSession.isAuthenticated()){
-                logger.error("### 인증되지 않은 접근. ### ");
-                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-            }
+//            if(!memberSession.isAuthenticated()){
+//                logger.error("### 인증되지 않은 접근. ### ");
+//                throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//            }
 
             System.out.println("#### create tostring : "+orderCreateRequest.toString());
 
             OrderDto orderDto = OrderDto.orderOf(orderCreateRequest);
-            orderDto.setId(memberSession.getMemberSession().getId());
+            //orderDto.setId(memberSession.getMemberSession().getId());
 
             result = orderService.insertOrderCompareAndSet(orderDto);
             if(result > 0){
@@ -363,10 +363,10 @@ public class OrderUserController extends BaseModuleController {
     @PostMapping(API_URL+"/order/pay")
     public ResponseEntity<?> orderPayment(@RequestParam("idx") long idx) throws Exception {
 
-        if(!memberSession.isAuthenticated()){
-            logger.error("### 인증되지 않은 접근. ### ");
-            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-        }
+//        if(!memberSession.isAuthenticated()){
+//            logger.error("### 인증되지 않은 접근. ### ");
+//            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//        }
 
         OrderDto orderDto = new OrderDto();
         orderDto.setIdx(idx);
@@ -389,11 +389,11 @@ public class OrderUserController extends BaseModuleController {
      */
     @PutMapping(API_URL+"/order/cancel")
     public ResponseEntity<?> orderCancelPayment(@RequestParam("idx") long idx) throws Exception {
-
-        if(!memberSession.isAuthenticated()){
-            logger.error("### 인증되지 않은 접근. ### ");
-            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-        }
+//
+//        if(!memberSession.isAuthenticated()){
+//            logger.error("### 인증되지 않은 접근. ### ");
+//            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//        }
 
         OrderDto orderDto = new OrderDto();
         orderDto.setIdx(idx);

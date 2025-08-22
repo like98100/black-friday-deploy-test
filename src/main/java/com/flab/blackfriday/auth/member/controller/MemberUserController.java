@@ -1,6 +1,6 @@
 package com.flab.blackfriday.auth.member.controller;
 
-import com.flab.blackfriday.auth.jwt.JwtProvider;
+//import com.flab.blackfriday.auth.jwt.JwtProvider;
 import com.flab.blackfriday.auth.member.dto.*;
 import com.flab.blackfriday.auth.member.service.MemberService;
 import com.flab.blackfriday.common.controller.BaseModuleController;
@@ -44,14 +44,14 @@ public class MemberUserController extends BaseModuleController {
     @GetMapping(API_URL+"/member/view")
     public MemberSummaryResponse selectMypageMember() throws Exception {
 
-        if(!memberSession.isAuthenticated()){
-            logger.error("### 인증되지 않은 접근. ### ");
-            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
-        }
+//        if(!memberSession.isAuthenticated()){
+//            logger.error("### 인증되지 않은 접근. ### ");
+//            throw new NoExistAuthException("회원 인증을 진행해주시기 바랍니다.",HttpStatus.UNAUTHORIZED.name());
+//        }
 
         MemberDto memberDto = new MemberDto();
-        memberDto.setId(memberSession.getMemberSession().getId());
-        memberDto = memberService.selectMember(memberDto);
+//        memberDto.setId(memberSession.getMemberSession().getId());
+//        memberDto = memberService.selectMember(memberDto);
 
         return MemberSummaryResponse.summaryViewOf(memberDto);
     }
@@ -104,7 +104,7 @@ public class MemberUserController extends BaseModuleController {
         }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.AUTHORIZATION,memberSession.createToken(prevDto));
+//        headers.set(HttpHeaders.AUTHORIZATION,memberSession.createToken(prevDto));
         return ResponseEntity.ok().headers(headers).body(new CommonResponse("로그인에 성공하였습니다.",null));
     }
 
