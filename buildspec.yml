@@ -57,13 +57,13 @@ phases:
               "name": "app",
               "image": "${REPOSITORY_URI}:${IMAGE_TAG}",
               "essential": true,  # 추가
-              "readonlyRootFilesystem": true,  # 보안 강화
-              "healthCheck": {  # 헬스체크 추가
-                "command": ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"],
-                "interval": 30,
-                "timeout": 5,
-                "retries": 3
-              },
+              #"readonlyRootFilesystem": true,  # 보안 강화
+              #"healthCheck": {  # 헬스체크 추가
+              #  "command": ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"],
+              #  "interval": 30,
+              #  "timeout": 5,
+              #  "retries": 3
+              #},
               "portMappings": [
                 {
                   "containerPort": 8080,
