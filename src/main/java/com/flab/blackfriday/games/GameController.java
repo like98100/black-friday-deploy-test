@@ -282,11 +282,11 @@ public class GameController {
                                 카드를 사용해서 본인만의 스타일대로 싸워 보세요.
                             </div>
                             <div class="game-meta">
-                                <span class="meta-item">📦 Size: 50MB</span>
-                                <span class="meta-item">🏷️ Version: 1.0.0</span>
+                                <span class="meta-item">📦 Size: 44.7MB</span>
+                                <span class="meta-item">🏷️ Version: 0.0.6</span>
                                 <span class="meta-item">💻 Platform: Windows</span>
                             </div>
-                            <a href="/api/games/download/crpg" class="download-btn" onclick="handleDownload(this, 'crpg')">
+                            <a href="/api/games/download/CRPG" class="download-btn" onclick="handleDownload(this, 'CRPG')">
                                 ⬇️ Download Game
                             </a>
                         </div>
