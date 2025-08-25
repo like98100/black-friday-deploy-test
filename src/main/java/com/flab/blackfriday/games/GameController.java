@@ -268,25 +268,25 @@ public class GameController {
                     </div>
                     
                     <div class="test-notice">
-                        <h3>🧪 테스트 모드</h3>
-                        <p>현재 테스트 파일(txt)로 동작 중입니다. 실제 게임 파일(.zip)을 업로드하면 정상적으로 다운로드됩니다.</p>
+                        <h3>🧪 주의사항</h3>
+                        <p>게임들은 전부 완성되지 않은 프로토타입입니다. 버그가 무조건 발생할 수 있습니다. ㅎㅎ ㅈㅅ;</p>
                     </div>
                     
                     <div class="game-grid">
                         <div class="game-card">
                             <div class="game-title">
-                                🎯 Unity Demo Game
+                                🎯 Card RPG
                             </div>
                             <div class="game-description">
-                                Unity 엔진의 다양한 기능을 체험할 수 있는 데모 게임입니다. 
-                                아름다운 그래픽과 매끄러운 게임플레이를 경험해보세요.
+                                2D 월드에서 인공지능과 1대1로 싸우는 게임입니다.
+                                카드를 사용해서 본인만의 스타일대로 싸워 보세요.
                             </div>
                             <div class="game-meta">
                                 <span class="meta-item">📦 Size: 50MB</span>
                                 <span class="meta-item">🏷️ Version: 1.0.0</span>
                                 <span class="meta-item">💻 Platform: Windows</span>
                             </div>
-                            <a href="/api/games/download/unity-demo" class="download-btn" onclick="handleDownload(this, 'unity-demo')">
+                            <a href="/api/games/download/crpg" class="download-btn" onclick="handleDownload(this, 'crpg')">
                                 ⬇️ Download Game
                             </a>
                         </div>
