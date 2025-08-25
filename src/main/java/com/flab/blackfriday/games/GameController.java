@@ -286,7 +286,7 @@ public class GameController {
                                 <span class="meta-item">🏷️ Version: 0.0.6</span>
                                 <span class="meta-item">💻 Platform: Windows</span>
                             </div>
-                            <a href="/api/games/download/CRPG" class="download-btn" onclick="handleDownload(this, 'CRPG')">
+                            <a href="https://drive.google.com/file/d/1aQKDhG2X9BfFVWUvymCSzn79pb3Lr__q/view?usp=drive_link" class="download-btn">
                                 ⬇️ Download Game
                             </a>
                         </div>
@@ -304,7 +304,7 @@ public class GameController {
                                 <span class="meta-item">🏷️ Version: 0.2.1</span>
                                 <span class="meta-item">💻 Platform: Windows</span>
                             </div>
-                            <a href="https://drive.google.com/file/d/14wUR28Ly2Qht1oFeWI28yJ5WjmcKO-eM/view?usp=drive_link">
+                            <a href="https://drive.google.com/file/d/14wUR28Ly2Qht1oFeWI28yJ5WjmcKO-eM/view?usp=drive_link" class="download-btn">
                                 ⬇️ Download Game
                             </a>
                         </div>
