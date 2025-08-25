@@ -256,6 +256,28 @@ public class GameController {
                         background: rgba(102, 126, 234, 0.2);
                         transform: translateX(-3px);
                     }
+                    .video-container {
+                        margin: 20px 0;
+                        position: relative;
+                        width: 100%;
+                        height: 0;
+                        padding-bottom: 56.25%; /* 16:9 비율 */
+                        border-radius: 10px;
+                        overflow: hidden;
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                        transition: transform 0.3s ease;
+                    }
+                    .video-container:hover {
+                        transform: scale(1.02);
+                    }
+                    .video-container iframe {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 10px;
+                    }
                 </style>
             </head>
             <body>
@@ -269,13 +291,13 @@ public class GameController {
                     
                     <div class="test-notice">
                         <h3>🧪 주의사항</h3>
-                        <p>게임들은 전부 완성되지 않은 프로토타입입니다. 완성되지 않은 기능과 버그가 있습니다. ㅎㅎ ㅈㅅ;</p>
+                        <p>게임들은 전부 완성되지 않은 프로토타입입니다. 완성되지 않은 기능과 버그가 있습니다. ㅎㅎ ㅈㄷ;</p>
                     </div>
                     
                     <div class="game-grid">
                         <div class="game-card">
                             <div class="game-title">
-                                📇 Card RPG
+                                🃏 Card RPG
                             </div>
                             <div class="game-description">
                                 2D 월드에서 인공지능과 1대1로 싸우는 게임입니다.
@@ -286,7 +308,17 @@ public class GameController {
                                 <span class="meta-item">🏷️ Version: 0.0.6</span>
                                 <span class="meta-item">💻 Platform: Windows</span>
                             </div>
-                            <a href="https://drive.google.com/file/d/1aQKDhG2X9BfFVWUvymCSzn79pb3Lr__q/view?usp=drive_link" class="download-btn">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/HMBkim4wCRA" 
+                                        frameborder="0" 
+                                        allowfullscreen
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                                </iframe>
+                            </div>
+                            <a href="https://drive.google.com/file/d/1aQKDhG2X9BfFVWUvymCSzn79pb3Lr__q/view?usp=drive_link" 
+                               class="download-btn" 
+                               target="_blank" 
+                               onclick="handleDownload(this, 'CRPG')">
                                 ⬇️ Download Game
                             </a>
                         </div>
@@ -304,7 +336,17 @@ public class GameController {
                                 <span class="meta-item">🏷️ Version: 0.2.1</span>
                                 <span class="meta-item">💻 Platform: Windows</span>
                             </div>
-                            <a href="https://drive.google.com/file/d/14wUR28Ly2Qht1oFeWI28yJ5WjmcKO-eM/view?usp=drive_link" class="download-btn">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/qPNAvaFS_v0" 
+                                        frameborder="0" 
+                                        allowfullscreen
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                                </iframe>
+                            </div>
+                            <a href="https://drive.google.com/file/d/14wUR28Ly2Qht1oFeWI28yJ5WjmcKO-eM/view?usp=drive_link" 
+                               class="download-btn" 
+                               target="_blank" 
+                               onclick="handleDownload(this, 'EdenDev')">
                                 ⬇️ Download Game
                             </a>
                         </div>
@@ -338,6 +380,7 @@ public class GameController {
             </html>
             """;
     }
+
 
     // REST API - 게임 목록
     @GetMapping("/api/games")
