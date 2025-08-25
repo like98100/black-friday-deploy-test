@@ -24,8 +24,8 @@ management:
         include: "health"
   server:
     port: 8080
-  security:
-    enabled: false
+#  security:
+#    enabled: false
 
 
 aws:

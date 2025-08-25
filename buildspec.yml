@@ -101,6 +101,8 @@ phases:
                 LoadBalancerInfo:
                   ContainerName: "app"
                   ContainerPort: 8080
+                HealthCheckGracePeriodSeconds: 300
+                PlatformVersion: LATEST
         EOF
 
 artifacts:
