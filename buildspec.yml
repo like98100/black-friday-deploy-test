@@ -48,13 +48,13 @@ phases:
       - |
         cat > taskdef.json <<EOF
         {
-          "family": "${PROJECT_NAME}-${ENVIRONMENT}-dev",
+          "family": "like98100-deploy-dev",
           "networkMode": "awsvpc",
           "requiresCompatibilities": ["FARGATE"],
           "cpu": "256",
           "memory": "512",
-          "executionRoleArn": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/${PROJECT_NAME}-${ENVIRONMENT}-dev-ecs-execution-role",
-          "taskRoleArn": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/${PROJECT_NAME}-${ENVIRONMENT}-dev-ecs-task-role",
+          "executionRoleArn": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/like98100-deploy-dev-ecs-execution-role",
+          "taskRoleArn": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/like98100-deploy-dev-ecs-task-role",
           "containerDefinitions": [
             {
               "name": "app",
@@ -70,7 +70,7 @@ phases:
               "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                  "awslogs-group": "/ecs/${PROJECT_NAME}-${ENVIRONMENT}-dev",
+                  "awslogs-group": "/ecs/like98100-deploy-dev",
                   "awslogs-region": "${AWS_DEFAULT_REGION}",
                   "awslogs-stream-prefix": "ecs"
                 }
