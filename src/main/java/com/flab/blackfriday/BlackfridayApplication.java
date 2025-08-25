@@ -8,8 +8,9 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-// security 때문에 권한으로 인해 접근안됨을 방지하기 위해 우선 security에 대해서 exclude 선언
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication(exclude = {
+        org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
+})
 @EnableJpaAuditing
 @EnableAsync
 public class BlackfridayApplication extends SpringBootServletInitializer {
