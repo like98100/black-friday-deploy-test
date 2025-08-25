@@ -304,7 +304,7 @@ public class GameController {
                                 <span class="meta-item">🏷️ Version: 0.2.1</span>
                                 <span class="meta-item">💻 Platform: Windows</span>
                             </div>
-                            <a href="/api/games/download/EdenDev" class="download-btn" onclick="handleDownload(this, 'EdenDev')">
+                            <a href="https://drive.google.com/file/d/14wUR28Ly2Qht1oFeWI28yJ5WjmcKO-eM/view?usp=drive_link">
                                 ⬇️ Download Game
                             </a>
                         </div>
