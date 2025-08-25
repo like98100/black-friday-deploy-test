@@ -269,13 +269,13 @@ public class GameController {
                     
                     <div class="test-notice">
                         <h3>🧪 주의사항</h3>
-                        <p>게임들은 전부 완성되지 않은 프로토타입입니다. 버그가 무조건 발생할 수 있습니다. ㅎㅎ ㅈㅅ;</p>
+                        <p>게임들은 전부 완성되지 않은 프로토타입입니다. 완성되지 않은 기능과 버그가 있습니다. ㅎㅎ ㅈㅅ;</p>
                     </div>
                     
                     <div class="game-grid">
                         <div class="game-card">
                             <div class="game-title">
-                                🎯 Card RPG
+                                📇 Card RPG
                             </div>
                             <div class="game-description">
                                 2D 월드에서 인공지능과 1대1로 싸우는 게임입니다.
@@ -293,18 +293,18 @@ public class GameController {
                         
                         <div class="game-card">
                             <div class="game-title">
-                                🚀 Space Shooter
+                                🗡️ Eden Dev
                             </div>
                             <div class="game-description">
-                                우주를 배경으로 한 클래식 슈팅 게임입니다. 
-                                적들의 공격을 피하며 최고 점수에 도전해보세요!
+                                카타나 하나로 이뤄지는 공방일체
+                                적의 공격을 쳐내고 처치하세요.
                             </div>
                             <div class="game-meta">
-                                <span class="meta-item">📦 Size: 75MB</span>
-                                <span class="meta-item">🏷️ Version: 2.1.0</span>
+                                <span class="meta-item">📦 Size: 169MB</span>
+                                <span class="meta-item">🏷️ Version: 0.2.1</span>
                                 <span class="meta-item">💻 Platform: Windows</span>
                             </div>
-                            <a href="/api/games/download/space-shooter" class="download-btn" onclick="handleDownload(this, 'space-shooter')">
+                            <a href="/api/games/download/EdenDev" class="download-btn" onclick="handleDownload(this, 'EdenDev')">
                                 ⬇️ Download Game
                             </a>
                         </div>
@@ -346,22 +346,22 @@ public class GameController {
 
         List<Map<String, String>> games = Arrays.asList(
                 Map.of(
-                        "id", "unity-demo",
-                        "name", "Unity Demo Game",
-                        "description", "Unity 엔진의 다양한 기능을 체험할 수 있는 데모 게임",
-                        "size", "50MB",
-                        "version", "1.0.0",
+                        "id", "CRPG",
+                        "name", "Card RPG",
+                        "description", "2D 월드에서 무기와 카드를 사용하여 인공지능과 1대1 교전 데모 게임",
+                        "size", "44.7MB",
+                        "version", "0.0.6",
                         "platform", "Windows",
-                        "downloadUrl", "/api/games/download/unity-demo"
+                        "downloadUrl", "/api/games/download/CRPG"
                 ),
                 Map.of(
-                        "id", "space-shooter",
-                        "name", "Space Shooter",
-                        "description", "우주를 배경으로 한 클래식 슈팅 게임",
-                        "size", "75MB",
-                        "version", "2.1.0",
+                        "id", "EdenDev",
+                        "name", "Eden Dev",
+                        "description", "카타나 하나로 공격을 쳐내며 교전하는 어드벤처 데모 게임",
+                        "size", "169MB",
+                        "version", "0.2.1",
                         "platform", "Windows",
-                        "downloadUrl", "/api/games/download/space-shooter"
+                        "downloadUrl", "/api/games/download/EdenDev"
                 )
         );
 
@@ -372,7 +372,7 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
-    // 게임 다운로드 (txt 파일 지원)
+    // 게임 다운로드
     @GetMapping("/api/games/download/{gameId}")
     public ResponseEntity<Resource> downloadGame(@PathVariable String gameId) {
         try {
@@ -380,8 +380,8 @@ public class GameController {
                 return ResponseEntity.badRequest().build();
             }
 
-            // txt 파일로 테스트
-            String filePath = "games/" + gameId + ".txt";
+
+            String filePath = "games/" + gameId + ".zip";
             Resource resource = new ClassPathResource(filePath);
 
             if (!resource.exists()) {
@@ -389,7 +389,7 @@ public class GameController {
             }
 
             // 실제 게임은 .zip으로, 테스트는 .txt로 다운로드
-            String fileName = gameId + ".txt";
+            String fileName = gameId + ".zip";
             String contentType = "text/plain";
 
             return ResponseEntity.ok()
