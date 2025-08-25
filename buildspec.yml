@@ -86,6 +86,10 @@ phases:
                 {
                   "name": "NODE_ENV",
                   "value": "dev"
+                },
+                {
+                  "name": "SPRING_PROFILES_ACTIVE",
+                  "value": "dev"
                 }
               ]
             }

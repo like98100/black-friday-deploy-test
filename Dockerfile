@@ -11,5 +11,5 @@ RUN echo "Copied jar file Check" && ls -la /app/
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar" ,"blackfriday.jar"]
-#ENTRYPOINT ["java", "-jar" ,"blackfriday.jar" , "-spring.profiles.active=dev"]
+#ENTRYPOINT ["java", "-jar" ,"blackfriday.jar"]
+ENTRYPOINT ["java", "-jar" ,"blackfriday.jar" , "--spring.profiles.active=dev"]
