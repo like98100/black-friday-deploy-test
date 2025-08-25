@@ -1,1 +1,24 @@
-다운로드할 수 있는 파일입니다.
+Unity Demo Game v1.0.0
+======================
+
+이것은 테스트용 게임 파일입니다.
+
+게임 정보:
+- 이름: Unity Demo Game
+- 버전: 1.0.0
+- 크기: 50MB
+- 플랫폼: Windows
+- 장르: 액션/어드벤처
+
+설치 방법:
+1. 파일을 원하는 폴더에 압축 해제
+2. Game.exe 실행
+3. 게임 즐기기!
+
+시스템 요구사항:
+- OS: Windows 10 이상
+- RAM: 4GB 이상
+- Graphics: DirectX 11 지원 그래픽카드
+
+개발: Unity 2023.1
+배포: ECS Fargate + CodePipeline
