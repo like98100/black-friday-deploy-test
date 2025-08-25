@@ -291,7 +291,7 @@ public class GameController {
                     
                     <div class="test-notice">
                         <h3>🧪 주의사항</h3>
-                        <p>게임들은 전부 완성되지 않은 프로토타입입니다. 완성되지 않은 기능과 버그가 있습니다. ㅎㅎ ㅈㄷ;</p>
+                        <p>게임들은 전부 완성되지 않은 프로토타입입니다. 완성되지 않은 기능과 버그가 있습니다. ㅎㅎ ㅈㅅ;</p>
                     </div>
                     
                     <div class="game-grid">
