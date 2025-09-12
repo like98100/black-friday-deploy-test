@@ -1,6 +1,7 @@
 # ![icons8-쇼핑백-30](https://github.com/f-lab-edu/black-friday/assets/67618667/0cbb168f-9353-4572-ac67-abf7ae909755) 백엔드 샘플 리포지토리
 
 배포 테스트를 위한 백엔드 샘플 프로젝트입니다.
+
 https://github.com/f-lab-edu/black-friday 위 링크를 fork해서 사용했습니다.
 
 # ![icons8-쇼핑백-30](https://github.com/f-lab-edu/black-friday/assets/67618667/0cbb168f-9353-4572-ac67-abf7ae909755) 프로젝트 목표
